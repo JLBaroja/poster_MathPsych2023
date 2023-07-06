@@ -25,10 +25,10 @@ display_margin <- function(color='#ff0000'){
            y1=c(global_margins[c(1,3)],rep(global_margins[3],2)),col=color_lines,lwd=15)
   lines(rep(0,2),global_margins[c(1,3)],col=color_lines,lwd=15)
   lines(global_margins[c(2,4)],rep(0,2),col=color_lines,lwd=15)
-  text(global_margins[2],0,paste(global_margins[2]),col=color,cex=6,adj=c(0.5,1.5),srt=90)
-  text(global_margins[4],0,paste(global_margins[4]),col=color,cex=6,adj=c(0.5,1.5),srt=-90)
-  text(0,global_margins[1],paste(global_margins[1]),col=color,cex=6,adj=c(0.5,-.5),srt=0)
-  text(0,global_margins[3],paste(global_margins[3]),col=color,cex=6,adj=c(0.5,1.5),srt=0)
+  text(global_margins[2],0,paste(global_margins[2]),col=color,cex=6,adj=c(0.5,0.5),srt=90)
+  text(global_margins[4],0,paste(global_margins[4]),col=color,cex=6,adj=c(0.5,0.5),srt=-90)
+  text(0,global_margins[1],paste(global_margins[1]),col=color,cex=6,adj=c(0.5,0.5),srt=0)
+  text(0,global_margins[3],paste(global_margins[3]),col=color,cex=6,adj=c(0.5,0.5),srt=0)
   
   grid_x <- -ceiling(g_pw):ceiling(g_pw)
   grid_y <- -ceiling(g_ph):ceiling(g_ph)
@@ -74,6 +74,7 @@ start_poster <- function(archive,
   g_pw <<- poster_width
   global_margins <<- c(-g_ph/2+margins[1],-g_pw/2+margins[2],g_ph/2-margins[3],g_pw/2-margins[4])
   global_plot_list <<- list()
+  archive <<- archive
   pdf(file=archive,width=poster_width,height=poster_height)
   par(plt=c(0,1,0,1),xaxs='i',yaxs='i')
   plot(0,type='n',xlim=c(0,1),ylim=c(0,1),axes=F,ann=F)
@@ -104,6 +105,7 @@ end_poster <- function(global_guides=T,
       }
     }
   }
+	embedFonts(archive)
   dev.off()
 }
 
@@ -180,4 +182,14 @@ new_plot <- function(which_point=NULL,
   par(plt=to_plt(x=c(effective_x_left,effective_x_right),
                  y=c(effective_y_bottom,effective_y_top)),new=T)
 }
+
+
+text_plot <- function(...){
+	plot(NULL,xlim=c(-1,1),ylim=c(-1,1),ann=F,...)
+}
+
+#insert_sentence <- function(xcrd,ycrd,sentence,){
+#	text(xcrd,ycrd,sentence,)
+#}
+
 
