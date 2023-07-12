@@ -1,5 +1,6 @@
 rm(list=ls())
 source('hpmp.R')
+source('plots_pigeons.R')
 library('extrafont')
 library('grImport')
 
@@ -29,7 +30,7 @@ new_plot(which_point='left_top',c(-15.5+header_height,22.5),
 #plot(0)
 text_plot(axes=F)
 text(0,0,'A Bayesian Graphical Model for Matching Law Behavior',adj=c(0.5,-.5),cex=5.5,family='CMU Serif',font=2)
-text(0,0,'56th Annual Meeting of the Society for Mathematical Psychology, University of Amsterdam, July 18-22, 2023',adj=c(0.5,-4.5),cex=2.5,family='CMU Serif',font=3)
+text(0,0,'56th Annual Meeting of the Society for Mathematical Psychology, University of Amsterdam, July 18-22, 2023.',adj=c(0.5,-4.5),cex=2.5,family='CMU Serif',font=3)
 text(0,0,'Luis Baroja & Joachim Vandekerckhove',adj=c(0.5,1.25),cex=4.5,family='CMU Serif')
 text(0,0,'University of California, Irvine. Department of Cognitive Sciences.',adj=c(0.5,4),cex=3,family='CMU Serif',font=3)
 
@@ -49,10 +50,17 @@ new_plot(which_point='right_top',c(-0.5,y_pos_schedules),
 	width=15,height=5,
 	'Time-based matching')
 
-# Bayesian software validation
-new_plot(which_point='center_center',c(0,0),
-	width=31,height=3,
-	'Bayesian software validation')
+# Pigeon data and post pred
+new_plot(which_point='right_top',c(-0.5,7),
+	width=15,height=10,
+	'Pigeon data')
+pigeons_data_plot(-8,2,15,10,1,1)
 
-end_poster(T,T)
+# Bayesian software validation
+#new_plot(which_point='center_center',c(-5,0),
+#	width=31,height=3,
+#	'Bayesian software validation')
+
+end_poster(global_guides=F,
+					 local_guides=F)
 #embed_fonts(file_name)

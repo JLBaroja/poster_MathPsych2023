@@ -184,8 +184,8 @@ new_plot <- function(which_point=NULL,
 }
 
 
-text_plot <- function(...){
-	plot(NULL,xlim=c(-1,1),ylim=c(-1,1),ann=F,...)
+text_plot <- function(axes=F){
+	plot(NULL,xlim=c(-1,1),ylim=c(-1,1),ann=F,axes=axes)
 }
 
 #insert_sentence <- function(xcrd,ycrd,sentence,){

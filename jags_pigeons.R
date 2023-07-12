@@ -1,22 +1,15 @@
+rm(list=ls())
 library('R2jags')
+
 pigeons <- read.csv('pigeon_data.csv')
-
-# Eliminate 0s (problematic for logs of ratios)
-zero_count_rows <-which(pigeons$n_reinf_right==0
-                          |pigeons$n_reinf_left==0
-                          |pigeons$n_resp_right==0
-                          |pigeons$n_resp_left==0)
-pigeons <- pigeons[-zero_count_rows,]
-
-# Stable sessions only
-pigeons <- pigeons[!pigeons$dynamic_env,]
 
 # Panel-data, reformating sessions and birds to numeric values
 sessions <- NA
 for(i in 1:nrow(pigeons)){
    sessions[i] <- as.numeric(strsplit(pigeons$session[i],split='s')[[1]][2])
 }
-birds <- as.numeric(as.factor(pigeons$bird))
+
+birds <- pigeons$bird_num
 
 priors <- list(mean_alpha = 0.0,
                sd_alpha   = 1/sqrt(.1),
@@ -41,7 +34,9 @@ observed <- list(
     n_obs            = length(sessions),
     n_birds          = length(unique(birds))
 )
-unobserved <- c('alpha', 'beta', 'tau', 'lambda_Br', 'lambda_Bl','log_B_post','Br_post','Bl_post')
+unobserved <- c('alpha', 'beta', 'tau',
+	#'lambda_Br', 'lambda_Bl',
+	'Br_post','Bl_post')
 write(
     'model{
 
@@ -54,23 +49,21 @@ write(
     }
 
     for(i in 1:n_obs){
-             lambda_Br[i] ~ dlnorm( alpha[birds[i]]/2 + beta[birds[i]] * log(Wr[i])/2, tau[birds[i]])
-             lambda_Bl[i] ~ dlnorm(-alpha[birds[i]]/2 - beta[birds[i]] * log(Wl[i])/2, tau[birds[i]])
+             lambda_Br[i] ~ dlnorm( alpha[birds[i]]/2 + beta[birds[i]] * log(Wr[i]/Wl[i])/2, tau[birds[i]])
+             lambda_Bl[i] ~ dlnorm(-alpha[birds[i]]/2 - beta[birds[i]] * log(Wr[i]/Wl[i])/2, tau[birds[i]])
              Br[i] ~ dpois(lambda_Br[i])
              Bl[i] ~ dpois(lambda_Bl[i])
     # Posterior predictive
              Br_post[i] ~ dpois(lambda_Br[i])
              Bl_post[i] ~ dpois(lambda_Bl[i])
-             #Br_post[i,birds[i]] ~ dpois(lambda_Br[i])
-             #Bl_post[i,birds[i]] ~ dpois(lambda_Bl[i])
-           #  log_B_post[i] <- log(Br_post[i,birds[i]]/Bl_post[i,birsd[i]])
          }
 
     }','matching_pigeons.bug')
 bayes_pigeons <- jags(
 	data = observed,
 	parameters.to.save = unobserved,
-	model.file = 'matching_pigeons.bug')
+	model.file = 'matching_pigeons.bug',
+	n.chains=3,n.iter=6000,n.thin=3,n.burnin=1000)
 unlink('matching_pigeons.bug')
 print(head(sort(bayes_pigeons$BUGSoutput$summary[,'Rhat'],decreasing=T),5))
 print(head(sort(bayes_pigeons$BUGSoutput$summary[,'n.eff'],decreasing=F),5))
