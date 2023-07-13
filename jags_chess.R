@@ -35,7 +35,7 @@ for(gr in c('experience','elo')){
 	    n_obs            = length(groups),
 	    n_groups          = length(unique(groups))
 	)
-	unobserved <- c('alpha', 'beta',#'tau',
+	unobserved <- c('alpha', 'beta','tau',
 		'alpha_prior','beta_prior')#,#'tau_prior',
 		#'lambda_Br', 'lambda_Bl',
 		#'Br_post','Bl_post')
