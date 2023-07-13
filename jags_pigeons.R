@@ -34,7 +34,8 @@ observed <- list(
     n_obs            = length(sessions),
     n_birds          = length(unique(birds))
 )
-unobserved <- c('alpha', 'beta', 'tau',
+unobserved <- c('alpha', 'beta',#'tau',
+	'alpha_prior','beta_prior',#'tau_prior',
 	#'lambda_Br', 'lambda_Bl',
 	'Br_post','Bl_post')
 write(
@@ -42,6 +43,10 @@ write(
 
 		# Add hierarchical
 
+		
+         alpha_prior ~ dnorm(mean_alpha_prior, pow(sd_alpha_prior, -2))T(-3,3)
+         beta_prior  ~ dnorm(mean_beta_prior , pow(sd_beta_prior , -2))T(-3,3)
+         #tau_prior   ~ dgamma(shape_tau_prior, rate_tau_prior)T(0.01,)
     for(b in 1:n_birds){
          alpha[b] ~ dnorm(mean_alpha_prior, pow(sd_alpha_prior, -2))T(-3,3)
          beta[b]  ~ dnorm(mean_beta_prior , pow(sd_beta_prior , -2))T(-3,3)

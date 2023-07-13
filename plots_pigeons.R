@@ -5,7 +5,7 @@ library('grImport')
 pigeons <- read.csv('pigeon_data.csv')
 load('posteriors_pigeons.RData')
 
-bird_colors <- c('#1b9e77','#e65201','#6146ca','#b12060','#68affc','#4749dc')
+bird_colors <- c('#1b9e77','#4be263','#6146ca','#8731c2','#68affc','#4749dc')
 
 
 bird_data_postdct <- function(brd,type='simple'){
@@ -156,30 +156,29 @@ pigeons_joints_plot <- function(x_cntr,y_cntr,wdth,hght,m1,m2){
 pigeons_marginals_plot <- function(node,...){
     if(node=='alpha'){
         marginal = nds_pigeons$alpha
+				prior = nds_pigeons$alpha_prior
         label = expression(alpha)
 				xlimz = c(-2,2)
 				line_at = 0
     }
     else if(node=='beta'){
         marginal = nds_pigeons$beta
+				prior = nds_pigeons$beta_prior
         label = expression(beta)
 				xlimz = c(-1,3)
 				line_at = 1
     }
-    else if(node=='tau'){
-        marginal = nds_pigeons$tau
-        label = expression(tau)
-    }
     plot(NULL,xlim=xlimz,...,axes=F,ann=F)
-		abline(v=line_at,lwd=2,lty='dashed',col='#ee0000')
-    #abline(h=.25)
 		par(cex.axis=1.5)
 		axis(1)
 		mtext(label,1,cex=2,line=3)
+    hist(prior,breaks=20,plot=F)->ht
+    lines(ht$mids,ht$density,lwd=2,lty='dotted')
 		for(brd in 1:6){
     	hist(marginal[,brd],breaks=40,plot=F)->ht
     	lines(ht$mids,ht$density,lwd=4,col=bird_colors[brd])
     }
+		abline(v=line_at,lwd=2,lty='dashed',col='#ee0000')
 }
 
 
