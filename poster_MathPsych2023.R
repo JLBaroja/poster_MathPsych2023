@@ -56,11 +56,29 @@ new_plot(which_point='right_top',c(-0.5,7),
 	'Pigeon data')
 pigeons_data_plot(-8,2,15,10,1,1)
 
+# Pigeon joint posteriors
+new_plot(which_point='right_top',c(-0.5,-3),
+	width=15,height=10,
+	'Pigeon joints')
+pigeons_joints_plot(-8,-8,15,10,1,1)
+
+# Pigeon marginal posteriors
+# Alpha
+new_plot(which_point='center_center',c(-11.5,-15.5),
+	width=5,height=4,
+	'Alpha marginals')
+pigeons_marginals_plot('alpha',ylim=c(0,1))
+# Beta
+new_plot(which_point='center_center',c(-4.5,-15.5),
+	width=5,height=4,
+	'Alpha marginals')
+pigeons_marginals_plot('beta',ylim=c(0,1))
+
 # Bayesian software validation
 #new_plot(which_point='center_center',c(-5,0),
 #	width=31,height=3,
 #	'Bayesian software validation')
 
-end_poster(global_guides=F,
-					 local_guides=F)
+#end_poster(F,F)
+end_poster(F,F)
 #embed_fonts(file_name)

@@ -43,8 +43,8 @@ write(
 		# Add hierarchical
 
     for(b in 1:n_birds){
-         alpha[b] ~ dnorm(mean_alpha_prior, pow(sd_alpha_prior, -2))T(-2,2)
-         beta[b]  ~ dnorm(mean_beta_prior , pow(sd_beta_prior , -2))T(-2,2)
+         alpha[b] ~ dnorm(mean_alpha_prior, pow(sd_alpha_prior, -2))T(-3,3)
+         beta[b]  ~ dnorm(mean_beta_prior , pow(sd_beta_prior , -2))T(-3,3)
          tau[b]   ~ dgamma(shape_tau_prior, rate_tau_prior)T(0.01,)
     }
 
