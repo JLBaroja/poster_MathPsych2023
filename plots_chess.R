@@ -9,12 +9,8 @@ load('posteriors_chess_experience.RData')
 nds_chess_experience <- nds_chess
 rm('nds_chess')
 
-palette_elo <- c('#e66101','#fdb863','#b2abd2','#5e3c99')
-#palette_elo <- c('#b3cde3','#8c96c6','#8856a7','#810f7c')
-palette_experience <- c('#a6611a','#dfc27d','#80cdc1','#018571')
-#palette_elo <- c('#b3cde3','#8c96c6','#8856a7','#810f7c')
-#palette_elo <- rep('#00EE00',4)
-#palette_experience <- rep('#00ee00',4)
+palette_elo <- c('#4575b4','#91bfdb','#e9a3c9','#c51b7d')
+palette_experience <- c('#5e3c99','#b2abd2','#80cdc1','#018571')
 
 chess_data_postdct <- function(grp,grouping,type='simple'){
 	# Plots data and postdiction for a single bird
@@ -135,13 +131,13 @@ chess_data_plot <- function(x_cntr,y_cntr,wdth,hght,m1,m2,grouping){
 		c(left_lim,bottom_lim),
 		width=(wdth-m2)*2/3,height=m1)
 	text_plot()
-	text(0,0,expression(paste(log,'(',W[accepted],'/',W[declined],')')),cex=3,family='CMU Serif')
+	text(0,0,expression(paste(log,'(',W[accepted],'/',W[declined],')')),cex=3)
 	# Y label
 	new_plot(which_point='right_bottom',
 		c(left_lim,bottom_lim),
 		width=m2,height=hght-m1)
 	text_plot()
-	text(0,0,expression(paste(log,'(',B[accepted],'/',B[declined],')')),cex=3,family='CMU Serif',srt=90)
+	text(0,0,expression(paste(log,'(',B[accepted],'/',B[declined],')')),cex=3,srt=90)
 	return(list(left_lim=left_lim,bottom_lim=bottom_lim,
 		right_lim=right_lim,top_lim=top_lim,
 		x_centers=x_centers,y_centers=y_centers))

@@ -214,7 +214,7 @@ insert_png <- function(file,coords,wdth,label=NULL){
 }
 
 
-square <- function(...,line=5,text=NULL,cex.text=1,font.text=1){
+square <- function(...,line=5,text=NULL,cex.text=1,font.text=1,box.lty='solid'){
 	new_plot(...,label=NULL)
 	text_plot()
 	polygon(x=c(-1,1,1,-1),y=c(-1,-1,1,1),
@@ -223,7 +223,7 @@ square <- function(...,line=5,text=NULL,cex.text=1,font.text=1){
 		text(0,0,text,cex=cex.text,font=font.text)
 	}
 	if(line>0){
-		box(lwd=line)
+		box(lwd=line,lty=box.lty)
 	}
 }
 

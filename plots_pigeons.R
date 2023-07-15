@@ -5,9 +5,7 @@ library('grImport')
 pigeons <- read.csv('pigeon_data.csv')
 load('posteriors_pigeons.RData')
 
-bird_colors <- c('#1b9e77','#4be263','#6146ca','#8731c2','#68affc','#4749dc')
-bird_colors <- c("#3182bd","#66a61e", "#e6ab02", "#1b9e77", "#d95f02", "#7570b3")
-
+bird_colors <- c("#3182bd","#d95f02","#e6ab02", "#1b9e77", "#66a61e", "#7570b3")
 
 bird_data_postdct <- function(brd,type='simple'){
 	# Plots data and postdiction for a single bird
@@ -45,6 +43,7 @@ bird_data_postdct <- function(brd,type='simple'){
 	points(log(b_dta$n_reinf_right/b_dta$n_reinf_left),
 		log(b_dta$n_resp_right/b_dta$n_resp_left),
 		pch=21,bg='#ffffff',lwd=2,cex=2)
+	text(-2.75,2.65,paste('Pigeon',brd),cex=1.2,col='#999999',font=2,adj=0)
 	par(cex.axis=1.5,tck=-0.02,mgp=c(3,0.75,0))
 	axis(1);axis(2,las=1)
 	abline(0,1,lty='dashed',lwd=2.5,col='#ee0000')
@@ -76,13 +75,13 @@ pigeons_data_plot <- function(x_cntr,y_cntr,wdth,hght,m1,m2){
 		c(left_lim,bottom_lim),
 		width=wdth-m2,height=m1)
 	text_plot()
-	text(0,0,expression(paste(log,'(',W[right],'/',W[left],')')),cex=3,family='CMU Serif')
+	text(0,0,expression(paste(log,'(',W[right],'/',W[left],')')),cex=3)
 	# Y label
 	new_plot(which_point='right_bottom',
 		c(left_lim,bottom_lim),
 		width=m2,height=hght-m1)
 	text_plot()
-	text(0,0,expression(paste(log,'(',B[right],'/',B[left],')')),cex=3,family='CMU Serif',srt=90)
+	text(0,0,expression(paste(log,'(',B[right],'/',B[left],')')),cex=3,srt=90)
 	return(list(left_lim=left_lim,bottom_lim=bottom_lim,
 		right_lim=right_lim,top_lim=top_lim,
 		x_centers=x_centers,y_centers=y_centers))
@@ -146,13 +145,13 @@ pigeons_joints_plot <- function(x_cntr,y_cntr,wdth,hght,m1,m2){
 		c(left_lim,bottom_lim),
 		width=wdth-m2,height=m1)
 	text_plot()
-	text(0,0,'Bias (intercept)',cex=3,family='CMU Serif')
+	text(0,0,'Bias (intercept)',cex=3)
 	# Y label
 	new_plot(which_point='right_bottom',
 		c(left_lim,bottom_lim),
 		width=m2,height=hght-m1)
 	text_plot()
-	text(0,0,'Sensitivity (slope)',cex=3,family='CMU Serif',srt=90)
+	text(0,0,'Sensitivity (slope)',cex=3,srt=90)
 	return(list(left_lim=left_lim,bottom_lim=bottom_lim,
 		right_lim=right_lim,top_lim=top_lim,
 		x_centers=x_centers,y_centers=y_centers))
