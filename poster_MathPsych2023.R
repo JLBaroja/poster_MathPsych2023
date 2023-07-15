@@ -31,10 +31,10 @@ new_plot(which_point='left_top',c(-15.5+header_height,22.5),
 	'Poster Title')
 #plot(0)
 text_plot(axes=F)
-text(0,0,'A Bayesian Graphical Model for Matching Law Behavior',adj=c(0.5,-.5),cex=5.5,font=2)
-text(0,0,'56th Annual Meeting of the Society for Mathematical Psychology, University of Amsterdam, July 18-22, 2023.',adj=c(0.5,-4.5),cex=2.5,font=3)
-text(0,0,'Luis Baroja & Joachim Vandekerckhove',adj=c(0.5,1.25),cex=4.25)
-text(0,0,'University of California, Irvine. Department of Cognitive Sciences.',adj=c(0.5,4),cex=2.75,font=3)
+text(0,0,'A Bayesian Graphical Model for Matching Law Behavior',adj=c(0.5,-1),cex=5.5,font=2)
+#text(0,0,'56th Annual Meeting of the Society for Mathematical Psychology, University of Amsterdam, July 18-22, 2023.',adj=c(0.5,-4.5),cex=2.5,font=3)
+text(0,0,'Luis Baroja & Joachim Vandekerckhove',adj=c(0.5,0.5),cex=4.25)
+text(0,0,'University of California, Irvine. Department of Cognitive Sciences.',adj=c(0.5,3),cex=2.75,font=3)
 
 
 # The Matching Law
@@ -45,7 +45,7 @@ square(which_point='center_center',coordinates=c(0,18.5),
 yc <- 18
 insert_png('model_1.png',c(-10.25,yc),wdth=9.5)
 insert_png('model_2.png',c(0,yc),wdth=9.5)
-insert_png('chess_jl.png',c(10.25,yc),wdth=10.25)
+insert_png('chess_jl.png',c(10.25,yc-.25),wdth=10.25)
 
 
 # VI and VR schedules
@@ -90,7 +90,7 @@ new_plot(which_point='left_top',c(0.5,y_pos_schedules),
 text_plot()
 string <- 'Chess Dataset'
 text_wrapped(0,.75,string,font=2,cex=2.5)
-string <- 'We analyzed the decisions made by the player controlling the Black pieces in response to the Queen\'s Gambit (QG). For this analysis, we worked with the lichess.org dataset, which contains over 4 billion games, and filtered for openings that featured the QG (only one month is analized below). When facing the QG, Black has two options: accepting it or declining it. The target data per player are the number of each of those decisions and the corresponding victories.'
+string <- 'We analyzed the decisions made by the player controlling the Black pieces in response to the Queen\'s Gambit (QG). For this analysis, we worked with the lichess.org dataset, which contains over 4 billion games, and filtered for openings that featured the QG. When facing the QG, Black has two options: accepting it or declining it. The target data per player are the number of each of those decisions and the corresponding victories. Only one month worth of data is reported next.'
 text_wrapped(0,0,string,cex=2.25,adj=0.5,wdth=85)
 
 
@@ -152,7 +152,7 @@ tx_wdth <- 55
 tx_cex <- 2
 string <- 'The distribution of pigeon responses among the two alternatives is influenced by the distribution of rewards obtained from them, albeit high individual variability and systematic deviations from the matching equilibrium.'
 text_wrapped(0,.45,string,cex=tx_cex,adj=0.5,wdth=tx_wdth)
-string <- 'Most pigeons clearly undermatch, with only one individual showing sensitivity consistent with strict matching. This may reflect a potentially over-abundant environment.'
+string <- 'Most pigeons clearly undermatch, with only one individual showing sensitivity levels consistent with strict matching. This may reflect a potentially over-abundant environment.'
 text_wrapped(0,-.25,string,cex=tx_cex,adj=0.5,wdth=tx_wdth)
 string <- 'However, all birds are unbiased and show no systematic preference for any alternative.'
 text_wrapped(0,-.75,string,cex=tx_cex,adj=0.5,wdth=tx_wdth)
@@ -187,9 +187,9 @@ new_plot(which_point='center_top',c(0,yc),
 text_plot()
 string <- 'The matching equilibrium is a robust phenomenon that arises under different types of environmental constrains.'
 text_wrapped(0,.6,string,cex=2,adj=0.5,wdth=75)
-string <- 'However, there is considerable variability across individuals, and certain systematic relationships between the matching parameters and other variables appear evident.'
+string <- 'Nevertheless, there is considerable variability across individuals, and certain systematic relationships between the matching parameters and other grouping variables appear evident.'
 text_wrapped(0,0.05,string,cex=2,adj=0.5,wdth=75)
-string <- 'Future steps will develop hiearchical extensions and explanatory modeling to better characterize the relationship between matching parameters and different covariates.'
+string <- 'Future steps will include developing hiearchical extensions and explanatory models to better characterize the relationship between matching parameters and different covariates.'
 text_wrapped(0,-.6,string,cex=2,adj=0.5,wdth=75)
 
 # Funding
@@ -216,6 +216,6 @@ text(.95,0,'https://cidlab.com',adj=1,font=2,cex=2)
 
 embedFonts(file_name)
 end_poster(F,F)
-#end_poster(T,F)
+#end_poster(T,T)
 #embed_fonts(file_name)
 
