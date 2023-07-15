@@ -188,6 +188,45 @@ text_plot <- function(axes=F){
 	plot(NULL,xlim=c(-1,1),ylim=c(-1,1),ann=F,axes=axes)
 }
 
+text_wrapped <- function(x,y,string,wdth=50,...){
+	text(x,y,paste(strwrap(string,width=wdth),collapse='\n'),...)
+}
+
+insert_png <- function(file,coords,wdth,label=NULL){
+	image <- readPNG(file)
+	# Get the image dimensions
+	img_width <- dim(image)[2]
+	img_height <- dim(image)[1]
+	
+	# Calculate the image position within the plot
+	xleft <- 0
+	xright <- img_width
+	ybottom <- 0
+	ytop <- img_height
+	
+	new_plot(which_point='center_top',coords,
+		width=wdth,height=wdth*(img_height/img_width),
+		label)
+	# Draw the image on the plot
+	plot(NULL,xlim=c(xleft,xright),ylim=c(ybottom,ytop),
+		axes=F,ann=F)
+	rasterImage(image, xleft, ybottom, xright, ytop)
+}
+
+
+square <- function(...,line=5,text=NULL,cex.text=1,font.text=1){
+	new_plot(...,label=NULL)
+	text_plot()
+	polygon(x=c(-1,1,1,-1),y=c(-1,-1,1,1),
+		col='#ffffff',border=F)
+	if(!is.null(text)){
+		text(0,0,text,cex=cex.text,font=font.text)
+	}
+	if(line>0){
+		box(lwd=line)
+	}
+}
+
 #insert_sentence <- function(xcrd,ycrd,sentence,){
 #	text(xcrd,ycrd,sentence,)
 #}
