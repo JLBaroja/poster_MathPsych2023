@@ -6,6 +6,7 @@ pigeons <- read.csv('pigeon_data.csv')
 load('posteriors_pigeons.RData')
 
 bird_colors <- c('#1b9e77','#4be263','#6146ca','#8731c2','#68affc','#4749dc')
+bird_colors <- c("#3182bd","#66a61e", "#e6ab02", "#1b9e77", "#d95f02", "#7570b3")
 
 
 bird_data_postdct <- function(brd,type='simple'){
@@ -44,9 +45,10 @@ bird_data_postdct <- function(brd,type='simple'){
 	points(log(b_dta$n_reinf_right/b_dta$n_reinf_left),
 		log(b_dta$n_resp_right/b_dta$n_resp_left),
 		pch=21,bg='#ffffff',lwd=2,cex=2)
-	par(cex.axis=1.25,tck=-0.02,mgp=c(3,0.75,0))
+	par(cex.axis=1.5,tck=-0.02,mgp=c(3,0.75,0))
 	axis(1);axis(2,las=1)
 	abline(0,1,lty='dashed',lwd=2.5,col='#ee0000')
+	text(2.75,2.75,'matching',cex=1,srt=45,adj=c(1,-0.5),col='#ee0000')
 	}
 }
 
@@ -108,12 +110,16 @@ bird_joints <- function(brd,type='simple'){
 	if(type=='complex'){
 	nice_scatter(alpha,beta,	
 		style='points',n_mids=40,point_scale=2,
-		xlimz=c(-2,2),ylimz=c(-1,3),color=bird_colors[brd],axes=F)
+		xlimz=c(-3,3),ylimz=c(-2,4),color=bird_colors[brd],axes=F)
 	box()
-	par(cex.axis=1.25,tck=-0.02,mgp=c(3,0.75,0))
+	par(cex.axis=1.5,tck=-0.02,mgp=c(3,0.75,0))
 	axis(1);axis(2,las=1)
 	abline(h=1,lty='dashed',lwd=2.5,col='#ee0000')
 	abline(v=0,lty='dashed',lwd=2.5,col='#ee0000')
+	text(-1.5,4,'biased to left',cex=1,adj=c(0.5,1.5),col='#ee000088')
+	text(1.5,4,'biased to right',cex=1,adj=c(0.5,1.5),col='#ee000088')
+	text(3,2.5,'overmatching',cex=1,srt=90,adj=c(0.5,-1),col='#ee000088')
+	text(3,-.5,'undermatching',cex=1,srt=90,adj=c(0.5,-1),col='#ee000088')
 	}
 }
 
@@ -140,13 +146,13 @@ pigeons_joints_plot <- function(x_cntr,y_cntr,wdth,hght,m1,m2){
 		c(left_lim,bottom_lim),
 		width=wdth-m2,height=m1)
 	text_plot()
-	text(0,0,'bias',cex=3,family='CMU Serif')
+	text(0,0,'Bias (intercept)',cex=3,family='CMU Serif')
 	# Y label
 	new_plot(which_point='right_bottom',
 		c(left_lim,bottom_lim),
 		width=m2,height=hght-m1)
 	text_plot()
-	text(0,0,'sensitivity',cex=3,family='CMU Serif',srt=90)
+	text(0,0,'Sensitivity (slope)',cex=3,family='CMU Serif',srt=90)
 	return(list(left_lim=left_lim,bottom_lim=bottom_lim,
 		right_lim=right_lim,top_lim=top_lim,
 		x_centers=x_centers,y_centers=y_centers))

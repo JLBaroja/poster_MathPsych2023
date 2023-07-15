@@ -97,46 +97,55 @@ text_wrapped(0,0,string,cex=2.25,adj=0.5,wdth=80)
 
 
 
-if(F){
+if(T){
+
 # Pigeon data and post pred
-yc <- 3
-new_plot(which_point='right_top',c(-0.5,yc),
-	width=15,height=10,
-	'Pigeon data')
+yc <- 4
+square(which_point='right_top',c(-0.5,yc),
+	width=15,height=10,line=3)
+square(which_point='left_center',c(-15,yc),
+	width=6,height=1,line=0,text='Pigeon data and posterior predictive',
+	cex.text=2,font.text=2)
 pigeons_data_plot(-8,yc-5,15,10,1,1)
 
 # Pigeon joint posteriors
-yc <- -7
-new_plot(which_point='right_top',c(-0.5,yc),
-	width=15,height=10,
-	'Pigeon joints')
+yc <- -6.75
+square(which_point='right_top',c(-0.5,yc),
+	width=15,height=10,line=3)
+square(which_point='left_center',c(-15,yc),
+	width=4.75,height=1,line=0,text='Joint posterior distributions',
+	cex.text=2,font.text=2)
 pigeons_joints_plot(-8,yc-5,15,10,1,1)
 
 # Pigeon marginal posteriors
 # Alpha
-new_plot(which_point='center_center',c(-11.5,-17.5),
-	width=5,height=4,
-	'Alpha marginals')
-pigeons_marginals_plot('alpha',ylim=c(0,.9))
+#new_plot(which_point='center_center',c(-11.5,-17.5),
+#	width=5,height=4,
+#	'Alpha marginals')
+#pigeons_marginals_plot('alpha',ylim=c(0,.9))
 # Beta
-new_plot(which_point='center_center',c(-4.5,-15.5),
-	width=5,height=4,
-	'Alpha marginals')
+#new_plot(which_point='center_center',c(-4.5,-15.5),
+#	width=5,height=4,
+#	'Alpha marginals')
 #pigeons_marginals_plot('beta',ylim=c(0,1.1))
 
-
+}
+if(T){
 # Chess data and post pred
-yc <- 3
-new_plot(which_point='left_top',c(0.5,yc),
-	width=15,height=10,
-	'Chess data')
-chess_data_plot(8,yc-5,15,10,1,1)
+yc <- 4
+square(which_point='left_top',c(0.5,yc),
+	width=15,height=10,line=3)
+square(which_point='right_center',c(15,yc),
+	width=5.25,height=1,line=0,text='Grouping by player level (ELO)',
+	cex.text=2,font.text=2)
+chess_data_plot(8,yc-5,15,10,1,1,grouping='elo')
 
-# Chess data and t pred
-yc <- -7
-new_plot(which_point='left_top',c(0.5,yc),
-	width=15,height=10,
-	'Chess data')
+yc <- -6.75
+square(which_point='left_top',c(0.5,yc),
+	width=15,height=10,line=3)
+square(which_point='right_center',c(15,yc),
+	width=5.25,height=1,line=0,text='Grouping by player experience',
+	cex.text=2,font.text=2)
 chess_data_plot(8,yc-5,15,10,1,1,grouping='experience')
 }
 
@@ -146,7 +155,7 @@ chess_data_plot(8,yc-5,15,10,1,1,grouping='experience')
 #	'Bayesian software validation')
 
 embedFonts(file_name)
-#end_poster(F,F)
-end_poster(T,T)
+end_poster(F,F)
+#end_poster(T,T)
 #embed_fonts(file_name)
 
